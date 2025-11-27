@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Row Quiz System</title>
+
+<style>
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #0f172a, #1e3a8a);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #f1f5f9;
+}
+
+.box {
+    width: 85%;
+    background: rgba(255,255,255,0.08);
+    padding: 30px;
+    border-radius: 20px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+    animation: fadeIn 1s ease;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 32px;
+    color: #38bdf8;
+    text-shadow: 0 0 10px rgba(56,189,248,0.7);
+}
+
+.qList {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.qBtn {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255,255,255,0.15);
+    color: #f1f5f9;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all .25s ease;
+    box-shadow: 0 0 8px rgba(255,255,255,0.3);
+}
+.qBtn:hover {
+    background: #38bdf8;
+    color: #0f172a;
+    transform: scale(1.1);
+}
+.disabled {
+    background: #475569 !important;
+    color: #cbd5e1 !important;
+    cursor: not-allowed !important;
+    box-shadow: none !important;
+}
+
+.rows {
+    text-align: center;
+    margin-top: 25px;
+    display: none;
+}
+
+.rowBtn {
+    padding: 12px 28px;
+    margin: 10px;
+    background: rgba(56,189,248,0.25);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    color: #f1f5f9;
+    transition: all .25s ease;
+    font-size: 18px;
+    box-shadow: 0 0 10px rgba(56,189,248,0.4);
+}
+.rowBtn:hover {
+    background: #38bdf8;
+    color: #0f172a;
+    transform: translateY(-2px);
+}
+
+#questionDisplay {
+    margin-top: 25px;
+    background: rgba(255,255,255,0.12);
+    padding: 18px;
+    border-radius: 12px;
+    display: none;
+    font-size: 22px;
+    text-align: center;
+    animation: popIn .5s ease;
+}
+
+#timer {
+    font-size: 28px;
+    text-align: center;
+    margin-top: 12px;
+    color: #facc15;
+    text-shadow: 0 0 10px rgba(250,204,21,0.7);
+}
+
+#ansButtons {
+    display: none;
+    text-align: center;
+    margin-top: 18px;
+}
+
+#ansButtons button {
+    padding: 12px 24px;
+    margin: 12px;
+    border-radius: 12px;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all .25s ease;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+#correctBtn {
+    background: #22c55e;
+    color: #fff;
+}
+#correctBtn:hover {
+    background: #16a34a;
+    transform: scale(1.05);
+}
+
+#wrongBtn {
+    background: #ef4444;
+    color: #fff;
+}
+#wrongBtn:hover {
+    background: #dc2626;
+    transform: scale(1.05);
+}
+
+#showAnswerBtn {
+    background: #f59e0b;
+    color: #fff;
+}
+#showAnswerBtn:hover {
+    background: #d97706;
+    transform: scale(1.05);
+}
+
+#scores {
+    margin-top: 25px;
+    background: rgba(0,0,0,0.4);
+    padding: 12px;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 20px;
+    color: #f1f5f9;
+    box-shadow: inset 0 0 10px rgba(255,255,255,0.1);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes popIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+    <h2>Row Quiz System</h2>
+
+    <div class="qList" id="qList"></div>
+
+    <div class="rows" id="rowSelect">
+        <h3>Choose Row</h3>
+        <button class="rowBtn" onclick="selectRow(1)">Row 1</button>
+        <button class="rowBtn" onclick="selectRow(2)">Row 2</button>
+        <button class="rowBtn" onclick="selectRow(3)">Row 3</button>
+    </div>
+
+    <div id="questionDisplay"></div>
+
+    <div id="timer"></div>
+
+    <div id="ansButtons">
+        <button id="correctBtn" onclick="markCorrect()">Correct</button>
+        <button id="wrongBtn" onclick="markWrong()">Wrong</button>
+        <button id="showAnswerBtn" onclick="showAnswer()">Show Answer</button>
+    </div>
+
+    <div id="scores">
+        Row 1: <span id="s1">0</span> &nbsp;
+        Row 2: <span id="s2">0</span> &nbsp;
+        Row 3: <span id="s3">0</span>
+    </div>
+   <div style="text-align:center; margin-top:20px;">
+    <button onclick="editScore()" style="padding:10px 20px; font-size:18px; border-radius:10px; background:#64748b; color:white; border:none; cursor:pointer;">
+        ✏️ Edit Score
+    </button>
+</div>
+
+</div>
+</body>
+<script>
+let questions = [
+    {q:"Who wrote 'Hamlet'?", ans:"William Shakespeare"},
+    {q:"Author of 'The Alchemist'?", ans:"Paulo Coelho"},
+    {q:"Epic 'Iliad' was written by?", ans:"Homer"},
+    {q:"Who is known as the God of Cricket?", ans:"Sachin Tendulkar"},
+    {q:"How many players in a football team?", ans:"11"},
+    {q:"Olympics are held every __ years?", ans:"4"},
+    {q:"World War II ended in?", ans:"1945"},
+    {q:"Which country attacked Pearl Harbor?", ans:"Japan"},
+    {q:"Hitler was leader of which country?", ans:"Germany"},
+    {q:"Fastest land animal?", ans:"Cheetah"},
+    {q:"Largest ocean?", ans:"Pacific Ocean"},
+    {q:"Hottest planet?", ans:"Venus"},
+    {q:"Planet with rings?", ans:"Saturn"},
+    {q:"Gas needed for breathing?", ans:"Oxygen"},
+    {q:"Square root of 144?", ans:"12"}
+];
+
+let selectedQ = -1;
+let timerInterval;
+let timeLeft = 30; 
+let scores = [0,0,0];
+let attemptCount = 1;
+let passSequence = [];
+let currentPassIndex = 0;
+let currentBtn = null;
+
+// build question buttons
+let qList = document.getElementById("qList");
+questions.forEach((q,i)=>{
+    let b=document.createElement("button");
+    b.className="qBtn";
+    b.textContent=i+1;
+    b.onclick=()=>chooseQ(i,b);
+    qList.appendChild(b);
+});
+
+function chooseQ(i,btn){
+    if(btn.classList.contains("disabled")) return;
+
+    selectedQ = i;
+    currentBtn = btn;
+
+    attemptCount = 1;
+    timeLeft = 30;
+    passSequence = [];
+    currentPassIndex = 0;
+
+    document.getElementById("rowSelect").style.display="block";
+    document.getElementById("questionDisplay").style.display="none";
+    document.getElementById("ansButtons").style.display="none";
+    document.getElementById("timer").innerHTML = "";
+}
+
+function selectRow(row){
+    // build pass sequence based on starting row
+    if (row === 1) passSequence = [1,2,3];
+    else if (row === 2) passSequence = [2,3,1];
+    else if (row === 3) passSequence = [3,1,2];
+
+    currentPassIndex = 0;
+    timeLeft = 30;
+
+    document.getElementById("questionDisplay").innerHTML =
+        "<b>Row "+passSequence[currentPassIndex]+"</b><br>"+questions[selectedQ].q;
+
+    document.getElementById("questionDisplay").style.display="block";
+    document.getElementById("ansButtons").style.display="block";
+    document.getElementById("rowSelect").style.display="none";
+
+    setTimeout(startTimer, 1000);
+}
+
+function startTimer(){
+    if (passSequence.length === 0) return; // no row selected yet
+
+    clearInterval(timerInterval);
+
+    let timerEl = document.getElementById("timer");
+    timerEl.style.color = attemptCount === 1 ? "yellow" : "orange";
+    timerEl.innerHTML = "⏳ " + timeLeft + "s";
+
+    timerInterval = setInterval(()=>{
+        timeLeft--;
+        timerEl.innerHTML = "⏳ " + timeLeft + "s";
+
+        if(timeLeft <= 0){
+            markWrong(); // auto pass
+        }
+    },1000);
+}
+
+function markCorrect() {
+    clearInterval(timerInterval);
+
+    let rowIndex = passSequence[currentPassIndex] - 1;
+    scores[rowIndex] += attemptCount === 1 ? 10 : 5;
+
+    updateScore();
+    currentBtn.classList.add("disabled");
+
+    let qBox = document.getElementById("questionDisplay");
+    qBox.style.background = "rgba(0,255,136,0.4)";
+    setTimeout(()=>qBox.style.background="rgba(255,255,255,0.2)",1000);
+
+    finishQuestion();
+}
+
+function markWrong(){
+    clearInterval(timerInterval);
+
+    attemptCount++;
+    currentPassIndex++;
+
+    if(currentPassIndex >= passSequence.length){
+        showAnswer();
+        return;
+    }
+
+    timeLeft = 15;
+
+    document.getElementById("questionDisplay").innerHTML =
+        "<b>Passed to Row "+passSequence[currentPassIndex]+"</b><br>"+questions[selectedQ].q;
+
+    startTimer();
+}
+
+function showAnswer(){
+    clearInterval(timerInterval);
+
+    let qBox = document.getElementById("questionDisplay");
+    qBox.innerHTML = "<b>Correct Answer:</b><br>" + questions[selectedQ].ans;
+    qBox.style.background = "rgba(251,191,36,0.4)";
+
+    currentBtn.classList.add("disabled");
+
+    setTimeout(finishQuestion, 3000);
+}
+
+function finishQuestion(){
+    clearInterval(timerInterval);
+
+    document.getElementById("questionDisplay").style.display="none";
+    document.getElementById("ansButtons").style.display="none";
+    document.getElementById("timer").innerHTML = "";
+}
+
+function updateScore(){
+    document.getElementById("s1").textContent = scores[0];
+    document.getElementById("s2").textContent = scores[1];
+    document.getElementById("s3").textContent = scores[2];
+}
+function editScore(){
+    let row = prompt("Enter row number to edit (1, 2, or 3):");
+    if (!["1","2","3"].includes(row)) {
+        alert("Invalid row number.");
+        return;
+    }
+
+    let change = prompt("Enter score change (e.g. 5 or -3):");
+    let delta = parseInt(change);
+    if (isNaN(delta)) {
+        alert("Invalid score value.");
+        return;
+    }
+
+    scores[parseInt(row)-1] += delta;
+    updateScore();
+
+    alert("Score updated for Row " + row);
+}
+
+</script>
+
+
+</html>
