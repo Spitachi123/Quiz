@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<title>Cosmic Vector Interface</title>
+<meta charset="UTF-8">
+<title>Kris - Interactive Vector Interface</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Ga+Maamli&family=Lobster&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 
 body {
     margin: 0;
     height: 100vh;
     background: radial-gradient(ellipse at bottom, #0a0f1f 0%, #000 80%);
-    overflow: hidden;
-    font-family:  "Lobster", cursive , sans-serif;
-    font-size: 20px;
+    overflow: auto;
+    font-family: "Lobster", cursive;
     color: #fff;
     position: relative;
 }
-/* Stars */
+
+/* Stars background */
 .stars {
     width: 100%;
     height: 100%;
@@ -28,26 +28,7 @@ body {
     left: 0;
     z-index: -2;
 }
-@keyframes twinkle {
-    from { opacity: 0.5; }
-    to { opacity: 1; }
-}
-
-/* Rotating Among Us */
-.amongus {
-    position: fixed;
-    width: 140px;
-    bottom: 25px;
-    right: 25px;
-    animation: spin 8s linear infinite;
-    opacity: 0.7;
-    pointer-events: none;
-    z-index: -1;
-}
-@keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
+@keyframes twinkle { from {opacity: 0.5;} to {opacity: 1;} }
 
 /* Navbar */
 nav {
@@ -56,10 +37,9 @@ nav {
     background: rgba(0,0,0,0.4);
     backdrop-filter: blur(6px);
 }
-
 nav button {
     margin: 8px;
-    padding: 14px 22px;
+    padding: 12px 20px;
     cursor: pointer;
     font-size: 18px;
     border: none;
@@ -68,99 +48,102 @@ nav button {
     color: white;
     transition: 0.3s;
 }
-nav button:hover {
-    transform: scale(1.1);
-}
+nav button:hover { transform: scale(1.1); }
 
 /* Sections */
-.section {
-    display: none;
-    padding: 20px;
-    text-align: center;
-}
+.section { display: none; padding: 20px; text-align: center; }
 #mainContent { display: block; }
+
+/* Sub-buttons */
+.sub-btn {
+    margin: 10px;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    background: #00ffaa;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.sub-btn:hover { transform: scale(1.1); box-shadow: 0 0 15px #00ffaa; }
+
+/* Content blocks */
+.content { display: none; text-align: left; margin-top: 15px; font-size: 20px; line-height: 1.5; }
 
 /* Modal overlay and container */
 #overlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top:0; left:0;
+    width:100%; height:100%;
     background: rgba(0,0,0,0.55);
-    display: none;
+    display:none;
     z-index: 98;
     backdrop-filter: blur(4px);
 }
-
 .modal {
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: #111;
-    padding: 22px;
-    border-radius: 12px;
-    width: 85%;
-    max-width: 480px;
-    box-shadow: 0 0 25px #00ffff88;
-    display: none;
-    z-index: 99;
-    text-align: center;
+    top:50%; left:50%;
+    transform: translate(-50%,-50%);
+    background:#111;
+    padding:22px;
+    border-radius:12px;
+    width:85%; max-width:480px;
+    box-shadow:0 0 25px #00ffff88;
+    display:none;
+    z-index:99;
+    text-align:center;
 }
-
 .modal button {
-    margin-top: 10px;
-    background: red;
-    border: none;
-    padding: 10px 18px;
-    cursor: pointer;
-    color: white;
-    border-radius: 6px;
+    margin-top:10px;
+    background:red;
+    border:none;
+    padding:10px 18px;
+    cursor:pointer;
+    color:white;
+    border-radius:6px;
 }
 
-/* Buttons inside Main Content */
-.option-btn {
-    margin: 15px;
-    padding: 15px 25px;
-    font-size: 18px;
-    border-radius: 10px;
-    background: #00ffaa;
-    border: none;
-    cursor: pointer;
-    transition: .3s;
-}
-.option-btn:hover {
-    transform: scale(1.15);
-    box-shadow: 0 0 20px #00ffaa;
-}
-
-/* Back Button */
+/* Back link */
+.back-link { position: fixed; top: 20px; left: 20px; z-index: 200; }
 .show-spacecraft-btn {
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 18px 36px;
-    font-size: 22px;
+    padding: 16px 28px;
+    font-size: 18px;
     font-weight: bold;
     background: linear-gradient(145deg, #00f6ff, #0066ff);
     border-radius: 40px;
-    box-shadow: 0 0 30px #00f6ff, 0 0 60px #0066ff;
     cursor: pointer;
+    transition: 0.3s;
 }
-.show-spacecraft-btn:hover {
-    transform: translateX(-50%) scale(1.1);
-}
-p{
+.show-spacecraft-btn:hover { transform: scale(1.1); }
+p,h3{
     font-size: 30px;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+/* Confusion form */
+#confusionForm input {
+    margin: 8px 0;
+    padding: 10px;
+    font-size: 16px;
+    width: 60%;
+    border-radius: 6px;
+    border: none;
+}
+#confusionForm button {
+    padding: 10px 20px;
+    margin-top: 10px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    background: #ff6600;
+    color: white;
+    border: none;
 }
 </style>
 </head>
-
 <body>
 
-<img class="amongus" src="imp-removebg-preview.png">
+<div class="stars"></div>
 
 <nav>
     <button onclick="showMain()">Main Content</button>
@@ -171,52 +154,79 @@ p{
 <!-- MAIN CONTENT -->
 <div id="mainContent" class="section">
     <h2>Choose a Topic</h2>
-    <button class="option-btn" onclick="showSection('vectorOps')">Operations of Vector</button>
-    <button class="option-btn" onclick="showSection('vectorProps')">Properties of Vector</button>
+    <button class="sub-btn" onclick="showSection('vectorOps')">Operations of Vector</button>
+    <button class="sub-btn" onclick="showSection('vectorProps')">Properties of Vector</button>
+    <button class="sub-btn" onclick="showSection('confusionSection')">Confusion Entry</button>
 </div>
 
-<!-- Vector Operations Section -->
+<!-- VECTOR OPERATIONS -->
 <div id="vectorOps" class="section">
     <h2>Vector Operations</h2>
-    <p>The two or more vector combine to give a single vector by adding , subtracting , multiplication with  scalar
-      is called vector Operations.
-    </p>
-<p>
- 1. Multiplication of vector<br>
- 2.Addition of vector <br>
- 3.Subtraction of vector<br>
-</p>
-<hr>
-<p> Triangle law of vector addition :The triangle law for vector addition states that if two vectors are represented by two sides of a triangle taken in order, then their vector sum is represented by the third side of the triangle taken in the opposite direction.</p><br><br>
-<p> Parallelogram of law of vector addition:The parallelogram rule says that if we place two vectors so they have the same initial point, and then complete the vectors into a parallelogram, then the sum of the vectors is the directed diagonal that starts at the same point as the vectors</p>
+    <button class="sub-btn" onclick="showContent('addition')">Addition of Vector</button>
+    <button class="sub-btn" onclick="showContent('scalarMul')">Multiplication by Scalar</button>
+    <button class="sub-btn" onclick="showContent('subtraction')">Subtraction of Vector</button>
+
+    <div id="addition" class="content">
+        <h3>Addition of Vector</h3>
+        <p>Two vectors can be added using following laws:</p>
+    </div>
+        <button class="sub-btn" onclick="showContent('triangleLaw')">Triangle Law</button>
+        <button class="sub-btn" onclick="showContent('parallelogramLaw')">Parallelogram Law</button>
+    
+        <div id="triangleLaw" class="content">
+            <p><strong>Triangle Law:</strong> If two vectors <em>⃗A</em> and <em>⃗B</em> are represented by two sides of a triangle in order, their sum <em>⃗R</em> is represented by the third side in opposite direction.</p>
+            <p>Mathematically: <em>⃗R = ⃗A + ⃗B</em></p>
+        </div>
+        <div id="parallelogramLaw" class="content">
+            <p><strong>Parallelogram Law: If two vectors <em>⃗A</em> and <em>⃗B</em> have same initial point, complete a parallelogram. The diagonal gives the sum.</strong></p>
+            <p>Mathematically: <em>⃗R = ⃗A + ⃗B</em></p>
+        </div>
+    </div>
+
+    <div id="scalarMul" class="content">
+        <h3>Multiplication by Scalar</h3>
+        <p>If a vector <em>⃗A</em> is multiplied by scalar <em>k</em>, the result is a vector in same or opposite direction depending on sign of <em>k</em>.</p>
+        <p>Mathematically: <em>⃗R = k ⃗A</em></p>
+    </div>
+
+    <div id="subtraction" class="content">
+        <h3>Subtraction of Vector</h3>
+        <p>Subtracting vector <em>⃗B</em> from <em>⃗A</em> is same as adding <em>⃗A</em> and <em>-⃗B</em>.</p>
+        <p>Mathematically: <em>⃗A - ⃗B = ⃗A + (-⃗B)</em></p>
+    </div>
 </div>
 
-
+<!-- VECTOR PROPERTIES -->
 <div id="vectorProps" class="section">
-    <h2>Vector Properties</h2><ol>
-      <li> Commulative property</li>
-      <li> Associative property</li>
-    </ol>
-    <p> Commulative property</p>
-      <p> The commutative property of vector addition states that the order in which vectors are added does not affect the resultant vector</p>
-    <hr>
-    <p> Associative property</p>
-    <p>The associative property of vector addition states that the order in which we add the three vectors is unimportant. Adding the first two vectors followed by the third one will produce the same result as adding the second and the first vector and then the first one.</p>
-<hr>
-<p> If a and b be the two vector then,
-  m(a vector+b vector)=m a vector+m b vector
-</p>
-  </div>
+    <h2>Vector Properties</h2>
+    <button class="sub-btn" onclick="showContent('commutative')">Commutative Property</button>
+    <button class="sub-btn" onclick="showContent('associative')">Associative Property</button>
 
-<!-- MODALS -->
+    <div id="commutative" class="content">
+        <p>The <strong>commutative property</strong> states: <em>⃗A + ⃗B = ⃗B + ⃗A</em></p>
+    </div>
+    <div id="associative" class="content">
+        <p>The <strong>associative property</strong> states: <em>⃗A + (⃗B + ⃗C) = (⃗A + ⃗B) + ⃗C</em></p>
+    </div>
+</div>
+
+<!-- CONFUSION ENTRY -->
+<div id="confusionSection" class="section">
+    <h2>Confusion Entry</h2>
+    <form id="confusionForm">
+        <input type="text" id="nameInput" placeholder="Your Name" required autocomplete="off"><br>
+        <input type="text" id="topicInput" placeholder="Topic you are confused in" required><br>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<!-- IMAGE MODAL -->
 <div id="overlay"></div>
-
 <div class="modal" id="imageModal">
     <h2>Image Viewer</h2>
-    <img src="download (1).png" width="100%">
+    <img src="download (1).png" width="100%" alt="Vector Images">
     <button onclick="closeModal()">Close</button>
 </div>
-
 <div class="modal" id="chartModal">
     <h2>Explanation Chart</h2>
     <ul style="text-align:left;">
@@ -227,29 +237,44 @@ p{
     <button onclick="closeModal()">Close</button>
 </div>
 
-<div class="stars"></div>
-
-<a href="member.html"><button class="show-spacecraft-btn">Back</button></a>
+<!-- Back Button -->
+<a href="member.html" class="back-link">
+    <button class="show-spacecraft-btn">Back</button>
+</a>
 
 <script>
-function showSection(id) {
+function showSection(id){
     document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
     document.getElementById(id).style.display = 'block';
+    document.querySelectorAll('.content').forEach(c => c.style.display = 'none');
 }
-
-function showMain() {
-    showSection('mainContent');
-}
-
-function openModal(id) {
-    document.getElementById('overlay').style.display = 'block';
+function showContent(id){
+    document.querySelectorAll('.content').forEach(c => c.style.display = 'none');
     document.getElementById(id).style.display = 'block';
 }
-
-function closeModal() {
-    document.getElementById('overlay').style.display = 'none';
-    document.querySelectorAll('.modal').forEach(m => m.style.display = 'none');
+function openModal(id){
+    document.getElementById('overlay').style.display='block';
+    document.getElementById(id).style.display='block';
 }
+function closeModal(){
+    document.getElementById('overlay').style.display='none';
+    document.querySelectorAll('.modal').forEach(m => m.style.display='none');
+}
+function showMain(){ showSection('mainContent'); }
+
+document.getElementById('confusionForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = document.getElementById('nameInput').value;
+    const topic = document.getElementById('topicInput').value;
+
+    // Store temporarily in sessionStorage
+    const saved = JSON.parse(sessionStorage.getItem('confusions')) || [];
+    saved.push({name, topic});
+    sessionStorage.setItem('confusions', JSON.stringify(saved));
+
+    
+    document.getElementById('confusionForm').reset();
+});
 </script>
 
 </body>

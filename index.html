@@ -4,11 +4,9 @@
 <meta charset="UTF-8" />
 <title>Vector Cosmic Launch Interface</title>
 <style>
-  /* --- Global & Background Styles --- */
   body {
     margin: 0;
     height: 100vh;
-    /* Deep space gradient */
     background: radial-gradient(ellipse at bottom, #0a0f1f 0%, #000 90%);
     overflow: hidden;
     font-family: 'Orbitron', sans-serif;
@@ -16,7 +14,6 @@
     position: relative;
   }
 
-  /* Starfield background pattern (reliable) */
   .stars {
     width: 100%;
     height: 100%;
@@ -32,11 +29,10 @@
     to { opacity: 1; }
   }
 
-  /* --- Title Styles --- */
   h1 {
     text-align: center;
-    font-size: 48px;
-    margin-top: 30px;
+    font-size: 5vw;
+    margin-top: 2vh;
     text-shadow: 0 0 25px #00f6ff, 0 0 50px #0066ff;
     animation: glowText 3s infinite alternate;
     z-index: 5;
@@ -47,97 +43,138 @@
     to { text-shadow: 0 0 35px #00f6ff; }
   }
 
-  /* --- Planet and Celestial Body Styles --- */
   .celestial-body {
     position: absolute;
     border-radius: 50%;
     background-size: cover;
     background-position: center;
-    /* Subtle orbit rings effect */
-    border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
     z-index: 2;
   }
 
-  /* Sun (Large and central) */
   .sun {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 250px;
-    height: 250px;
-    /* Placeholder or direct base color for guaranteed display */
+    width: 18vw;
+    height: 18vw;
     background-image:url(sun.png);
-    /* Strong glow effect */
-
-    z-index: 1;
     animation: solarPulse 5s infinite alternate;
-    border: none; /* No border for the Sun */
+    border: none;
   }
   @keyframes solarPulse {
     from { transform: translate(-50%, -50%) scale(1); opacity: 0.9; }
     to { transform: translate(-50%, -50%) scale(1.05); opacity: 1; }
   }
 
-  /* Earth (Static, positioned for visual balance) */
-  .earth-container {
-    top: 40%;
-    left: 20%;
-    width: 120px;
-    height: 120px;
-    /* Placeholder for Earth image */
-    background-image: url('earth.png'); /* Using a reliable placeholder */
-    z-index: 3;
-    border-width: 3px;
+  /* Orbit Containers */
+  .orbit {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    animation: rotateOrbit linear infinite;
+  }
+  @keyframes rotateOrbit {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
   }
 
-  /* Jupiter (Static, positioned for visual balance) */
+  /* Earth + Moon */
+  .earth-orbit {
+    width: 30vw;
+    height: 30vw;
+    animation-duration: 20s;
+  }
+  .earth-container {
+    width: 8vw;
+    height: 8vw;
+    background-image: url('earth.png');
+    position: absolute;
+    top: 0;
+    left: 80%;
+    transform: translateX(-50%);
+    border: 2px solid rgba(255,255,255,0.2);
+  }
+  .moon-orbit {
+    width: 12vw;
+    height: 12vw;
+    position: absolute;
+    top: -2vw;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: rotateOrbit 6s linear infinite;
+  }
+
+
+  /* Jupiter */
+  .jupiter-orbit {
+    width: 45vw;
+    height: 45vw;
+    animation-duration: 40s;
+  }
   .jupiter {
-    top: 25%;
-    right: 15%;
-    width: 150px;
-    height: 150px;
-    /* Placeholder for Jupiter image */
-    background-image: url('jupiter.png'); /* Using a reliable placeholder */
-    z-index: 3;
-    border-width: 3px;
+    width: 10vw;
+    height: 10vw;
+    background-image: url('jupiter.png');
+    position: absolute;
+    top: 0;
+    left: 100%;
+    transform: translateX(-50%);
     box-shadow: 0 0 20px #ff9900;
   }
 
-  /* --- Spacecraft & Launch Styles --- */
+  /* Saturn */
+  .saturn-orbit {
+    width: 60vw;
+    height: 60vw;
+    animation-duration: 60s;
+  }
+  .saturn {
+    width: 9vw;
+    height: 9vw;
+    background-image:url(neptune-Photoroom.png);
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 120%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 20px #92e0ff;
+  }
+
+  /* Rocket */
   #craftOrbit {
     position: absolute;
-    bottom: -100px; /* Start below the screen */
+    bottom: -20vh;
     left: 50%;
-    width: 100px;
-    height: 100px;
-    margin-left: -50px;
+    width: 12vw;
+    height: 12vw;
+    margin-left: -6vw;
     display: none;
     z-index: 5;
-    transition: transform 4s cubic-bezier(0.7, 0, 0.3, 1); /* Smoother launch curve */
+    transition: transform 4s cubic-bezier(0.7, 0, 0.3, 1);
   }
   #craftOrbit.launching {
-    transform: translateY(-80vh); /* Launch high into space */
+    transform: translateY(-90vh) rotate(-10deg);
   }
 
   .spacecraft {
-    width: 100px;
-    height: 100px;
-    /* Custom, simple rocket image/shape for guaranteed display */
+    width: 100%;
+    height: 100%;
     background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50 0 L65 75 L50 90 L35 75 Z" fill="%23ccc"/><rect x="40" y="30" width="20" height="50" fill="%23fff"/><circle cx="50" cy="90" r="10" fill="%23aaa"/></svg>');
     background-size: contain;
     background-repeat: no-repeat;
-    filter: drop-shadow(0 0 15px #fff);
-    position: relative;
-    transform: rotate(180deg); /* Point up */
+    filter: drop-shadow(0 0 25px #fff);
+    transform: rotate(180deg);
   }
 
   .flame {
     position: absolute;
-    top: -40px; /* Position the flame at the bottom */
+    top: -5vh;
     left: 50%;
-    width: 30px;
-    height: 60px;
+    width: 3vw;
+    height: 6vw;
     background: radial-gradient(circle, #ffee99 20%, #ff6600 60%, transparent 100%);
     border-radius: 50%;
     transform: translateX(-50%);
@@ -148,14 +185,14 @@
     to { transform: translateX(-50%) scaleY(1.4); opacity: 1; }
   }
 
-  /* --- Button Styles --- */
+  /* Button */
   .show-spacecraft-btn {
     position: absolute;
-    bottom: 30px;
+    bottom: 3vh;
     left: 50%;
     transform: translateX(-50%);
-    padding: 18px 36px;
-    font-size: 22px;
+    padding: 2vh 4vh;
+    font-size: 2.2vh;
     font-weight: bold;
     color: #fff;
     background: linear-gradient(145deg, #00f6ff, #0066ff);
@@ -175,53 +212,71 @@
     border-color: #505050;
     cursor: not-allowed;
   }
+
+  /* Responsive tweaks */
+  @media (max-width: 768px) {
+    .sun { width: 25vw; height: 25vw; }
+    .earth-container, .jupiter, .saturn { width: 12vw; height: 12vw; }
+    #craftOrbit { width: 18vw; height: 18vw; }
+  }
 </style>
 </head>
 <body>
 
 <div class="stars"></div>
-
 <h1>🌠 Welcome to the world of Vector!</h1>
 
 <div class="celestial-body sun"></div>
 
-<div class="celestial-body earth-container"></div>
+<div class="orbit earth-orbit">
+  <div class="celestial-body earth-container"></div>
+  <div class="moon-orbit">
+        <div class="moon"></div>
+  </div>
+</div>
 
-<div class="celestial-body jupiter"></div>
+<!-- Jupiter Orbit -->
+<div class="orbit jupiter-orbit">
+  <div class="celestial-body jupiter"></div>
+</div>
 
+<!-- Saturn Orbit -->
+<div class="orbit saturn-orbit">
+  <div class="celestial-body saturn"></div>
+</div>
 
+<!-- Rocket -->
 <div id="craftOrbit">
   <div class="spacecraft">
     <div class="flame"></div>
   </div>
 </div>
 
+<!-- Launch Button -->
 <button class="show-spacecraft-btn" id="showCraftBtn">🚀 Initiate Launch Sequence</button>
-
+</body>
 <script>
   const craftOrbit = document.getElementById("craftOrbit");
   const showCraftBtn = document.getElementById("showCraftBtn");
 
   showCraftBtn.addEventListener("click", () => {
-    // 1. Disable button
+    // Disable button
     showCraftBtn.disabled = true;
     showCraftBtn.textContent = "Ignition...";
 
-    // 2. Show the rocket
+    // Show rocket
     craftOrbit.style.display = "block";
 
-    // 3. Initiate Launch (after a tiny delay for CSS to catch up)
+    // Launch animation
     setTimeout(() => {
       craftOrbit.classList.add("launching");
       showCraftBtn.textContent = "Ascension...";
-    }, 50);
+    }, 100);
 
-    // 4. Redirect after launch animation is complete (4 seconds)
+    // Redirect after launch
     setTimeout(() => {
       window.location.href = "member.html";
-    }, 4050);
+    }, 4200);
   });
 </script>
-
-</body>
 </html>

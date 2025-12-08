@@ -17,7 +17,24 @@ body {
     color: #fff;
     position: relative;
 }
-
+#confusionForm input {
+    margin: 8px 0;
+    padding: 10px;
+    font-size: 16px;
+    width: 60%;
+    border-radius: 6px;
+    border: none;
+}
+#confusionForm button {
+    padding: 10px 20px;
+    margin-top: 10px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    background: #ff6600;
+    color: white;
+    border: none;
+}
 /* Stars background */
 .stars {
     width: 100%;
@@ -160,6 +177,17 @@ pre {
     white-space: pre-wrap; /* wrap text so it doesn’t overflow */
     line-height: 1.6;
 }
+.sub-btn {
+    margin: 10px;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    background: #00ffaa;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.sub-btn:hover { transform: scale(1.1); box-shadow: 0 0 15px #00ffaa; }
 </style>
 </head>
 
@@ -178,6 +206,7 @@ pre {
     <button class="option-btn" onclick="showSection('vectorOps')">Equal Vectors</button>
     <button class="option-btn" onclick="showSection('vectorProps')">Unequal Vectors</button>
     <button class="option-btn" onclick="showSection('vectorprll')">Parallel or collinear vectors</button>
+    <button class="sub-btn" onclick="showSection('confusionSection')">Confusion Entry</button>
 </div>
 
 <!-- Vector Operations Section -->
@@ -188,6 +217,14 @@ Definition: Two vectors are equal if they have the same length (magnitude) and p
 
 Example: If vector PQ and vector RS both point northeast and are 5 units long, then PQ = RS.
     </pre>
+</div>
+<div id="confusionSection" class="section">
+    <h2>Confusion Entry</h2>
+    <form id="confusionForm">
+        <input type="text" id="nameInput" placeholder="Your Name" required autocomplete="off"><br>
+        <input type="text" id="topicInput" placeholder="Topic you are confused in" required><br>
+        <button type="submit">Submit</button>
+    </form>
 </div>
 
 <div id="vectorProps" class="section">
@@ -273,5 +310,19 @@ function closeModal() {
     document.getElementById('overlay').style.display = 'none';
     document.querySelectorAll('.modal').forEach(m => m.style.display = 'none');
 }
+
+document.getElementById('confusionForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = document.getElementById('nameInput').value;
+    const topic = document.getElementById('topicInput').value;
+
+    // Store temporarily in sessionStorage
+    const saved = JSON.parse(sessionStorage.getItem('confusions')) || [];
+    saved.push({name, topic});
+    sessionStorage.setItem('confusions', JSON.stringify(saved));
+
+    
+    document.getElementById('confusionForm').reset();
+});
 </script>
 </html>

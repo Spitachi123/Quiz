@@ -5,28 +5,28 @@
 <title>Cosmic Vector Interface</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Ga+Maamli&family=Lobster&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Ga+Maamli&family=Lobster&family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Ubuntu:wght@300;400;500;700&display=swap');
 
 body {
     margin: 0;
-    height: 100vh;
+    min-height: 100vh;   /* allow page to grow */
     background: radial-gradient(ellipse at bottom, #0a0f1f 0%, #000 80%);
-    overflow: hidden;
-    font-family:  "Lobster", cursive , sans-serif;
+    font-family: "Lobster", cursive, sans-serif;
     font-size: 20px;
     color: #fff;
     position: relative;
+    overflow-x: hidden;  /* only hide horizontal scroll */
 }
 
-/* Stars */
+/* Stars background stays fixed */
 .stars {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     background: url("https://www.transparenttextures.com/patterns/stardust.png") repeat;
     animation: twinkle 8s infinite alternate;
-    position: absolute;
-    top: 0;
-    left: 0;
     z-index: -2;
 }
 @keyframes twinkle {
@@ -56,6 +56,9 @@ nav {
     padding: 15px;
     background: rgba(0,0,0,0.4);
     backdrop-filter: blur(6px);
+    position: sticky;
+    top: 0;
+    z-index: 50;
 }
 
 nav button {
@@ -78,6 +81,7 @@ nav button:hover {
     display: none;
     padding: 20px;
     text-align: center;
+    min-height: 100vh;   /* ensures scroll space */
 }
 #mainContent { display: block; }
 
@@ -138,10 +142,9 @@ nav button:hover {
 
 /* Back Button */
 .show-spacecraft-btn {
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
+    position: relative;
+    margin: 40px auto;
+    display: block;
     padding: 18px 36px;
     font-size: 22px;
     font-weight: bold;
@@ -151,10 +154,63 @@ nav button:hover {
     cursor: pointer;
 }
 .show-spacecraft-btn:hover {
-    transform: translateX(-50%) scale(1.1);
+    transform: scale(1.1);
 }
 p{
     font-size: 35px;
+}
+.sub-btn {
+    margin: 10px;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    background: #00ffaa;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.sub-btn:hover { transform: scale(1.1); box-shadow: 0 0 15px #00ffaa; }
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    body { font-size: 18px; }
+    nav button { font-size: 16px; padding: 12px 18px; }
+    .option-btn, .sub-btn { font-size: 16px; padding: 12px 20px; }
+    p { font-size: 28px; }
+}
+@media (max-width: 768px) {
+    nav { display: flex; flex-wrap: wrap; justify-content: center; }
+    nav button { margin: 6px; width: 45%; }
+    .modal { width: 95%; max-width: none; }
+    #confusionForm input, #confusionForm button { width: 90%; font-size: 14px; }
+    .show-spacecraft-btn { font-size: 18px; padding: 14px 28px; }
+    p { font-size: 24px; }
+}
+@media (max-width: 480px) {
+    body { font-size: 16px; }
+    nav button { width: 100%; margin: 5px 0; font-size: 14px; }
+    .option-btn, .sub-btn { width: 100%; margin: 10px 0; font-size: 14px; }
+    .amongus { width: 90px; bottom: 10px; right: 10px; }
+    .show-spacecraft-btn { font-size: 16px; padding: 12px 24px; }
+    p { font-size: 20px; }
+}
+#confusionForm input {
+    margin: 8px 0;
+    padding: 10px;
+    font-size: 16px;
+    width: 60%;
+    border-radius: 6px;
+    border: none;
+}
+#confusionForm button {
+    padding: 10px 20px;
+    margin-top: 10px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    background: #ff6600;
+    color: white;
+    border: none;
 }
 </style>
 </head>
@@ -173,35 +229,40 @@ p{
     <h2>Choose a Topic</h2>
     <button class="option-btn" onclick="showSection('vectorOps')">Directed Line Segments</button>
     <button class="option-btn" onclick="showSection('vectorProps')">Physical Quantities</button>
+    <button class="sub-btn" onclick="showSection('confusionSection')">Confusion Entry</button>
 </div>
 
 <!-- Vector Operations Section -->
 <div id="vectorOps" class="section">
     <h2>Directed line segments</h2>
-    <p>A directed line segment is a line segment that has a specific direction from its initial endpoint to its terminal endpoint. It carries both a position (where it is located in space) and a direction (which way it points). This concept is common in geometry, vectors, and physics. The directed segment from 
-A to B
-is often written as 
-→
-AB
-   
+    <p>A directed line segment is a line segment that has a specific direction from its initial endpoint to its terminal endpoint. It carries both a position (where it is located in space) and a direction (which way it points). This concept is common in geometry, vectors, and physics. The directed segment from A to B is often written as →AB</p>
 </div>
 
+<!-- Confusion Section -->
+<div id="confusionSection" class="section">
+    <h2>Confusion Entry</h2>
+    <form id="confusionForm">
+        <input type="text" id="nameInput" placeholder="Your Name" required autocomplete="off"><br>
+        <input type="text" id="topicInput" placeholder="Topic you are confused in" required><br>
+        <button type="submit">Submit</button>
+    </form>
+</div>
 
+<!-- Vector Properties Section -->
 <div id="vectorProps" class="section">
-    <h2>Physical quantities</h2><ol>
-      <p>A physical quantity is any property of a physical system that can be measured or described quantitatively. </p>
+    <h2>Physical quantities</h2>
+    <p>A physical quantity is any property of a physical system that can be measured or described quantitatively.</p>
     <hr>
-    <p> Scalar Quantities</p>
+    <p><strong>Scalar Quantities</strong></p>
+    <p>Quantities described by a single magnitude only (no direction). Examples: mass (kg), temperature (K), time (s), energy (J), volume (m³).</p>
+    <hr>
+        <p><strong>Vector Quantities</strong></p>
     <p>
-Quantities described by a single magnitude only (no direction).
-Examples: mass (kg), temperature (K), time (s), energy (J), volume (m³).</p>
-<hr>
-<p> Vector Quantities</p>
-    <p>Quantities described by both magnitude and direction.
-Examples: displacement, velocity, acceleration, force, electric field.
-Represented graphically with arrows; mathematically, they add using vector algebra.
-</p>
-  </div>
+        Quantities described by both magnitude and direction. <br>
+        Examples: displacement, velocity, acceleration, force, electric field. <br>
+        Represented graphically with arrows; mathematically, they add using vector algebra.
+    </p>
+</div>
 
 <!-- MODALS -->
 <div id="overlay"></div>
@@ -230,6 +291,7 @@ Represented graphically with arrows; mathematically, they add using vector algeb
 function showSection(id) {
     document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
     document.getElementById(id).style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' }); // scroll to top when switching
 }
 
 function showMain() {
@@ -245,6 +307,20 @@ function closeModal() {
     document.getElementById('overlay').style.display = 'none';
     document.querySelectorAll('.modal').forEach(m => m.style.display = 'none');
 }
+
+document.getElementById('confusionForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = document.getElementById('nameInput').value;
+    const topic = document.getElementById('topicInput').value;
+
+    // Store temporarily in sessionStorage
+    const saved = JSON.parse(sessionStorage.getItem('confusions')) || [];
+    saved.push({name, topic});
+    sessionStorage.setItem('confusions', JSON.stringify(saved));
+
+    document.getElementById('confusionForm').reset();
+    alert("Confusion submitted successfully!");
+});
 </script>
 
 </body>

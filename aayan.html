@@ -5,53 +5,19 @@
 <title>Cosmic Vector Interface</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Ga+Maamli&family=Lobster&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Lobster&display=swap');
 
 body {
     margin: 0;
-    min-height: 100vh;   /* allow body to expand */
+    min-height: 100vh;
     background: radial-gradient(ellipse at bottom, #0a0f1f 0%, #000 80%);
-    overflow-x: hidden;  /* no horizontal scroll */
-    overflow-y: auto;    /* enable vertical scroll */
-    font-family: "Lobster", cursive, sans-serif;
-    font-size: 20px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    font-family: 'Lobster', cursive;
+    font-size: 30px;
     color: #fff;
     position: relative;
 }
-
-/* Stars background */
-.stars {
-    width: 100%;
-    height: 100%;
-    background: url("https://www.transparenttextures.com/patterns/stardust.png") repeat;
-    animation: twinkle 8s infinite alternate;
-    position: fixed; /* stays fixed while scrolling */
-    top: 0;
-    left: 0;
-    z-index: -2;
-}
-@keyframes twinkle {
-    from { opacity: 0.5; }
-    to { opacity: 1; }
-}
-
-/* Rotating Among Us */
-.amongus {
-    position: fixed;
-    width: 140px;
-    bottom: 25px;
-    right: 25px;
-    animation: spin 8s linear infinite;
-    opacity: 0.7;
-    pointer-events: none;
-    z-index: -1;
-}
-@keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
-/* Navbar */
 nav {
     text-align: center;
     padding: 15px;
@@ -61,7 +27,6 @@ nav {
     top: 0;
     z-index: 10;
 }
-
 nav button {
     margin: 8px;
     padding: 14px 22px;
@@ -76,56 +41,17 @@ nav button {
 nav button:hover {
     transform: scale(1.1);
 }
-
-/* Sections */
 .section {
     display: none;
     padding: 20px;
-    text-align: center;
+    text-align: left;
+    max-width: 900px;
+    margin: auto;
+    line-height: 1.6;
 }
-#mainContent { display: block; }
+#mainContent { display: block; text-align: center; }
 
-/* Modal overlay and container */
-#overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.55);
-    display: none;
-    z-index: 98;
-    backdrop-filter: blur(4px);
-}
-
-.modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: #111;
-    padding: 22px;
-    border-radius: 12px;
-    width: 85%;
-    max-width: 480px;
-    box-shadow: 0 0 25px #00ffff88;
-    display: none;
-    z-index: 99;
-    text-align: center;
-}
-
-.modal button {
-    margin-top: 10px;
-    background: red;
-    border: none;
-    padding: 10px 18px;
-    cursor: pointer;
-    color: white;
-    border-radius: 6px;
-}
-
-/* Buttons inside Main Content */
-.option-btn {
+.option-btn, .sub-btn {
     margin: 15px;
     padding: 15px 25px;
     font-size: 18px;
@@ -135,14 +61,11 @@ nav button:hover {
     cursor: pointer;
     transition: .3s;
 }
-.option-btn:hover {
+.option-btn:hover, .sub-btn:hover {
     transform: scale(1.15);
     box-shadow: 0 0 20px #00ffaa;
 }
-
-/* Back Button */
 .show-spacecraft-btn {
-    position: relative;
     margin: 40px auto;
     display: block;
     padding: 18px 36px;
@@ -156,162 +79,232 @@ nav button:hover {
 .show-spacecraft-btn:hover {
     transform: scale(1.1);
 }
-pre{
-  font-family: 'Lobster';
-    font-size: 35px;
+.stars {
+    width: 100%;
+    height: 100%;
+    background: url("https://www.transparenttextures.com/patterns/stardust.png") repeat;
+    animation: twinkle 8s infinite alternate;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -2;
+}
+@keyframes twinkle {
+    from { opacity: 0.5; }
+    to { opacity: 1; }
+}
+.amongus {
+    position: fixed;
+    width: 140px;
+    bottom: 25px;
+    right: 25px;
+    animation: spin 8s linear infinite;
+    opacity: 0.7;
+    pointer-events: none;
+    z-index: -1;
+}
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+#confusionForm input {
+    margin: 8px 0;
+    padding: 10px;
+    font-size: 16px;
+    width: 60%;
+    border-radius: 6px;
+    border: none;
+}
+#confusionForm button {
+    padding: 10px 20px;
+    margin-top: 10px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    background: #ff6600;
+    color: white;
+    border: none;
+}
+table {
+    width: 95%;
+    margin: auto;
+    border-collapse: collapse;
+    font-size: 20px;
+}
+th, td {
+    padding: 10px;
+    border: 1px solid #fff;
+}
+th {
+    background: #00ffaa;
+    color: #000;
 }
 </style>
 </head>
-
 <body>
 
 <img class="amongus" src="imp-removebg-preview.png">
 
 <nav>
     <button onclick="showMain()">Main Content</button>
-    <button onclick="openModal('imageModal')">Summary</button>
-  
+    <button onclick="showSection('summary')">Summary</button>
 </nav>
 
-<!-- MAIN CONTENT -->
 <div id="mainContent" class="section">
     <h2>Choose a Topic</h2>
-    <button class="option-btn" onclick="showSection('vectorOps')">Direction of Vectors </button>
-    <button class="option-btn" onclick="showSection('vectorProps')">Ways to Show the Direction of a Vector </button>
-    <button class="option-btn" onclick="showSection('vectortps')">Types of Vector </button>
+    <button class="option-btn" onclick="showSection('vectorOps')">Direction of Vectors</button>
+    <button class="option-btn" onclick="showSection('vectorProps')">Ways to Show the Direction of a Vector</button>
+    <button class="option-btn" onclick="showSection('vectortps')">Types of Vector</button>
+    <button class="sub-btn" onclick="showSection('confusionSection')">Confusion Entry</button>
 </div>
 
-<!-- Vector Operations Section -->
 <div id="vectorOps" class="section">
-    <h2> Direction of Vectors</h2>
-    <p>The direction of a vector tells us which way the vector is pointing. Direction of the vector is important because two vectors with the same magnitude can be completely different if they point in different directions.<br>
-For example:<br>
-10 N force upwards<br>
-10 N force to the right<br>
-These produce different effects even though their magnitudes are equal.<br>
-Examples where direction is essential:<br>
-Wind direction<br>
-Movement of vehicles<br>
-Navigation using maps<br>
-Forces acting on objects<br>
-Sports (e.g., throwing a ball)
-</p>
+    <h2>Direction of Vectors</h2>
+    <p>The direction of a vector tells us which way the vector is pointing. Direction of the vector is important because two vectors with the same magnitude can be completely different if they point in different directions.</p>
+    <p>For example:<br>
+    - 10 N force upwards<br>
+    - 10 N force to the right<br>
+    These produce different effects even though their magnitudes are equal.</p>
+    <p>Examples where direction is essential:<br>
+    - Wind direction<br>
+    - Movement of vehicles<br>
+    - Navigation using maps<br>
+    - Forces acting on objects<br>
+    - Sports (e.g., throwing a ball)</p>
 </div>
 
 <div id="vectorProps" class="section">
-    <h2>Ways to Show the Direction of a Vector </h2>
+    <h2>Ways to Show the Direction of a Vector</h2>
     <p>The direction of a vector shows which way it points. There are several ways to represent it mathematically or descriptively.</p>
-    <hr>
-    <ol>
-      <h2><li> Angle with a Reference Axis</li></h2>
-      <pre>1.Angle with a Reference Axis
-A vector’s direction can be expressed as the angle it makes with a reference axis, usually the x-axis (horizontal axis).
-This angle is measured in degrees or radians.
-Example:
-v⃗=10 units at 45 degree v=10 units at 45 degree
-Meaning: The vector has a magnitude of 10 units and points 45° above the horizontal x-axis, towards the top-right direction.
-Using angles is useful when vectors are drawn or when calculating direction mathematically.
-</pre>
-      <pre>2.Vector Components
-A vector can be split into horizontal (x) and vertical (y) components.
-This method shows exactly how far the vector moves along each axis, which determines its direction.
-Example:
-v⃗=3i^+4j^​=3i^+4j^​
-Meaning: The vector moves 3 units in the x-direction (right) and 4 units in the y-direction (up).
-Using components makes it easy to calculate direction, especially for vectors not aligned along a single axis.
-<hr>
-3. Compass Directions
-Vectors can also be described using compass points, commonly used in navigation and practical applications.
-Directions are expressed as North (N), South (S), East (E), West (W), or combinations like North-East (NE).
-Example:
-v⃗=5 m North-East
-Meaning: The vector points diagonally between North and East.
-Compass directions give an easy descriptive understanding of the vector’s orientation in space.
-</pre>
-    </ol>
-<hr>
+    <h3>1. Angle with a Reference Axis</h3>
+    <p>A vector’s direction can be expressed as the angle it makes with a reference axis, usually the x-axis (horizontal axis).<br>
+    This angle is measured in degrees or radians.<br>
+    Example:<br>
+    v⃗ = 10 units at 45 degree<br>
+    Meaning: The vector has a magnitude of 10 units and points 45° above the horizontal x-axis, towards the top-right direction.<br>
+    Using angles is useful when vectors are drawn or when calculating direction mathematically.</p>
+
+    <h3>2. Vector Components</h3>
+    <p>A vector can be split into horizontal (x) and vertical (y) components.<br>
+    This method shows exactly how far the vector moves along each axis, which determines its direction.<br>
+    Example:<br>
+    v⃗ = 3i⃗ + 4j⃗<br>
+    Meaning: The vector moves 3 units in the x-direction (right) and 4 units in the y-direction (up).<br>
+    Using components makes it easy to calculate direction, especially for vectors not aligned along a single axis.</p>
+
+    <h3>3. Compass Directions</h3>
+    <p>Vectors can also be described using compass points, commonly used in navigation and practical applications.<br>
+    Directions are expressed as North (N), South (S), East (E), West (W), or combinations like North-East (NE).<br>
+    Example:<br>
+    v⃗ = 5 m North-East<br>
+    Meaning: The vector points diagonally between North and East.<br>
+    Compass directions give an easy descriptive understanding of the vector’s orientation in space.</p>
 </div>
+
 <div id="vectortps" class="section">
-  <pre>
-     Row Vector
-A vector written in a single horizontal row.
-Example:
-v⃗=[2,3,4]v=[2,3,4]
-Often used in matrices and linear algebra.
+    <h2>Types of Vectors</h2>
+    <p><strong>Row Vector</strong><br>
+    A vector written in a single horizontal row.<br>
+    Example: v⃗ = [2,3,4]<br>
+    Often used in matrices and linear algebra.</p>
 
-2. Column Vector
-A vector written in a single vertical column.
-Example:
+    <p><strong>Column Vector</strong><br>
+    A vector written in a single vertical column.<br>
+    Useful in matrix operations and computer programming.</p>
 
-Useful in matrix operations and computer programming.
+    <p><strong>Zero Vector (0⃗)</strong><br>
+    A vector with magnitude 0 and no specific direction.<br>
+    Example: 0⃗ = [0,0,0]<br>
+    Represents no movement or null effect.</p>
 
-3. Zero Vector (0⃗0)
-A vector with magnitude 0 and no specific direction.
-Example:
-0⃗=[0,0,0]0=[0,0,0]
-Represents no movement or null effect.
+        <p><strong>Unit Vector (i^, j^, k^)</strong><br>
+    A vector with magnitude 1 used to indicate direction along axes.<br>
+    Example: i^ = [1,0,0], j^ = [0,1,0], k^ = [0,0,1]<br>
+    Unit vectors are often used to build other vectors using components.</p>
 
-4. Unit Vector (i^,j^,k^i^,j^​,k^)
-A vector with magnitude 1 used to indicate direction along axes.
-Example:
-i^=[1,0,0]i^=[1,0,0], j^=[0,1,0]j^​=[0,1,0]
-Unit vectors are often used to build other vectors using components.
-Negative Vector (−A⃗−A)
-A negative vector has the same magnitude as a given vector but points in the opposite direction.
-It is represented as:
-                                −A⃗
-Meaning: If A⃗points right, −A⃗ points left; if A⃗ points up, −A⃗ points down.
-Negative vectors are often used to reverse the effect of a vector, such as in forces, displacement, or velocity.
-
-  </pre>
-</div>
-<!-- MODALS -->
-<div id="overlay"></div>
-
-<div class="modal" id="imageModal">
-    <h2>Image Viewer</h2>
-    <img src=".png" width="100%">
-    <button onclick="closeModal()">Close</button>
+    <p><strong>Negative Vector (−A⃗)</strong><br>
+    A negative vector has the same magnitude as a given vector but points in the opposite direction.<br>
+    It is represented as: −A⃗<br>
+    Meaning: If A⃗ points right, −A⃗ points left; if A⃗ points up, −A⃗ points down.<br>
+    Negative vectors are often used to reverse the effect of a vector, such as in forces, displacement, or velocity.</p>
 </div>
 
-<div class="modal" id="chartModal">
-    <h2>Explanation Chart</h2>
-    <ul style="text-align:left;">
-        <li>Vector Quantities</li>
-        <li>Magnitude and Direction</li>
-        <li>Applications in Physics</li>
-    </ul>
-    <button onclick="closeModal()">Close</button>
+<div id="confusionSection" class="section">
+    <h2>Confusion Entry</h2>
+    <form id="confusionForm">
+        <input type="text" id="nameInput" placeholder="Your Name" required autocomplete="off"><br>
+        <input type="text" id="topicInput" placeholder="Topic you are confused in" required><br>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<div id="summary" class="section">
+    <h2>Vector Summary Table</h2>
+    <table>
+        <thead>
+            <tr><th>Concept</th><th>Explanation</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Direction</td>
+                <td>Shows where the vector points; determines its effect</td>
+            </tr>
+            <tr>
+                <td>Relevance</td>
+                <td>Vectors with same magnitude but different directions produce different effects</td>
+            </tr>
+            <tr>
+                <td>Types of Vectors</td>
+                <td>Zero, Unit, Row, Column</td>
+            </tr>
+            <tr>
+                <td>Row Vector</td>
+                <td>Written horizontally</td>
+            </tr>
+            <tr>
+                <td>Column Vector</td>
+                <td>Written vertically</td>
+            </tr>
+            <tr>
+                <td>Zero Vector</td>
+                <td>Magnitude 0, no direction</td>
+            </tr>
+            <tr>
+                <td>Unit Vector</td>
+                <td>Magnitude 1, shows direction along axes</td>
+            </tr>
+            <tr>
+                <td>Negative Vector</td>
+                <td>Same magnitude as another vector but points opposite</td>
+            </tr>
+            <tr>
+                <td>Ways to Show Direction</td>
+                <td>Angle with axis, vector components, compass directions</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 
 <div class="stars"></div>
-
 <a href="member.html"><button class="show-spacecraft-btn">Back</button></a>
-</body>
+
 <script>
 function showSection(id) {
-    // Hide all sections
     document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
-    // Show the requested section
     document.getElementById(id).style.display = 'block';
 }
-
 function showMain() {
     showSection('mainContent');
 }
-
-function openModal(id) {
-    // Show overlay
-    document.getElementById('overlay').style.display = 'block';
-    // Show the requested modal
-    document.getElementById(id).style.display = 'block';
-}
-
-function closeModal() {
-    // Hide overlay
-    document.getElementById('overlay').style.display = 'none';
-    // Hide all modals
-    document.querySelectorAll('.modal').forEach(m => m.style.display = 'none');
-}
+document.getElementById('confusionForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = document.getElementById('nameInput').value;
+    const topic = document.getElementById('topicInput').value;
+    const saved = JSON.parse(sessionStorage.getItem('confusions')) || [];
+    saved.push({name, topic});
+    sessionStorage.setItem('confusions', JSON.stringify(saved));
+    document.getElementById('confusionForm').reset();
+});
 </script>
+</body>
 </html>

@@ -5,20 +5,20 @@
 <title>Cosmic Vector Interface</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Ga+Maamli&family=Lobster&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 
 body {
     margin: 0;
     height: 100vh;
     background: radial-gradient(ellipse at bottom, #0a0f1f 0%, #000 80%);
     overflow: hidden;
-    font-family:  "Lobster", cursive , sans-serif;
+    font-family: "Lobster", cursive, sans-serif;
     font-size: 20px;
     color: #fff;
     position: relative;
 }
 
-/* Stars */
+/* Stars background */
 .stars {
     width: 100%;
     height: 100%;
@@ -29,26 +29,7 @@ body {
     left: 0;
     z-index: -2;
 }
-@keyframes twinkle {
-    from { opacity: 0.5; }
-    to { opacity: 1; }
-}
-
-/* Rotating Among Us */
-.amongus {
-    position: fixed;
-    width: 140px;
-    bottom: 25px;
-    right: 25px;
-    animation: spin 8s linear infinite;
-    opacity: 0.7;
-    pointer-events: none;
-    z-index: -1;
-}
-@keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
+@keyframes twinkle { from {opacity: 0.5;} to {opacity: 1;} }
 
 /* Navbar */
 nav {
@@ -57,7 +38,6 @@ nav {
     background: rgba(0,0,0,0.4);
     backdrop-filter: blur(6px);
 }
-
 nav button {
     margin: 8px;
     padding: 14px 22px;
@@ -69,58 +49,13 @@ nav button {
     color: white;
     transition: 0.3s;
 }
-nav button:hover {
-    transform: scale(1.1);
-}
+nav button:hover { transform: scale(1.1); }
 
 /* Sections */
-.section {
-    display: none;
-    padding: 20px;
-    text-align: center;
-}
+.section { display: none; padding: 20px; text-align: center; }
 #mainContent { display: block; }
 
-/* Modal overlay and container */
-#overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.55);
-    display: none;
-    z-index: 98;
-    backdrop-filter: blur(4px);
-}
-
-.modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: #111;
-    padding: 22px;
-    border-radius: 12px;
-    width: 85%;
-    max-width: 480px;
-    box-shadow: 0 0 25px #00ffff88;
-    display: none;
-    z-index: 99;
-    text-align: center;
-}
-
-.modal button {
-    margin-top: 10px;
-    background: red;
-    border: none;
-    padding: 10px 18px;
-    cursor: pointer;
-    color: white;
-    border-radius: 6px;
-}
-
-/* Buttons inside Main Content */
+/* Option buttons */
 .option-btn {
     margin: 15px;
     padding: 15px 25px;
@@ -131,11 +66,74 @@ nav button:hover {
     cursor: pointer;
     transition: .3s;
 }
-.option-btn:hover {
-    transform: scale(1.15);
-    box-shadow: 0 0 20px #00ffaa;
+.option-btn:hover { transform: scale(1.15); box-shadow: 0 0 20px #00ffaa; }
+
+/* Confusion form */
+#confusionForm input {
+    margin: 8px 0;
+    padding: 10px;
+    font-size: 16px;
+    width: 60%;
+    border-radius: 6px;
+    border: none;
+}
+#confusionForm button {
+    padding: 10px 20px;
+    margin-top: 10px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    background: #ff6600;
+    color: white;
+    border: none;
 }
 
+/* Modal overlay */
+#overlay {
+    position: fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    background: rgba(0,0,0,0.55);
+    display:none;
+    z-index: 98;
+    backdrop-filter: blur(4px);
+}
+
+/* Modal container */
+.modal {
+    position: fixed;
+    top:50%; left:50%;
+    transform: translate(-50%,-50%);
+    background:#111;
+    padding:22px;
+    border-radius:12px;
+    width:85%; max-width:600px;
+    box-shadow:0 0 25px #00ffff88;
+    display:none;
+    z-index:99;
+    text-align:center;
+    max-height:80vh;       /* limit height */
+    overflow-y:auto;       /* enable scroll */
+    scroll-behavior:smooth;
+}
+.modal img {
+    width:100%;
+    margin-bottom:20px;
+    border-radius:8px;
+    box-shadow:0 0 15px #00ffaa55;
+}
+.modal button {
+    margin-top:10px;
+    background:red;
+    border:none;
+    padding:10px 18px;
+    cursor:pointer;
+    color:white;
+    border-radius:6px;
+}
+p{
+    font-size: 40px;
+}
 /* Back Button */
 .show-spacecraft-btn {
     position: absolute;
@@ -150,103 +148,94 @@ nav button:hover {
     box-shadow: 0 0 30px #00f6ff, 0 0 60px #0066ff;
     cursor: pointer;
 }
-.show-spacecraft-btn:hover {
-    transform: translateX(-50%) scale(1.1);
-}
-p{
-    font-size: 40px;
-}
+.show-spacecraft-btn:hover { transform: translateX(-50%) scale(1.1); }
 </style>
 </head>
 
 <body>
 
-<img class="amongus" src="imp-removebg-preview.png">
+<div class="stars"></div>
 
 <nav>
     <button onclick="showMain()">Main Content</button>
-    <button onclick="openModal('imageModal')">Image Bar</button>
+    <button onclick="openModal('imageModal')">Image Viewer</button>
 </nav>
 
 <!-- MAIN CONTENT -->
 <div id="mainContent" class="section">
     <h2>Choose a Topic</h2>
     <button class="option-btn" onclick="showSection('vectorOps')">Representation of vector</button>
-    <button class="option-btn" onclick="showSection('vectorProps')"> Position vector of a point in a plane</button>
-    <button class="option-btn" onclick="showSection('vectorrps')">Representation of vectors in terms of two given co-ordinate</button>
+    <button class="option-btn" onclick="showSection('vectorProps')">Position vector of a point in a plane</button>
+    <button class="option-btn" onclick="showSection('vectorrps')">Representation in terms of coordinates</button>
     <button class="option-btn" onclick="showSection('vectormgtd')">Magnitude of vectors</button>
+    <button class="option-btn" onclick="showSection('confusionSection')">Confusion Entry</button>
 </div>
 
-<!-- Vector Operations Section -->
+<!-- Sections -->
 <div id="vectorOps" class="section">
     <h2>Representation of vector</h2>
-    <p>vectors are denoted by the directed line segemnts
-e.g., \(\vec{v}\))</p>
+    <p>Vectors are denoted by directed line segments, e.g., \(\vec{v}\).</p>
 </div>
 
-
 <div id="vectorProps" class="section">
-    <h2>Position vector of a point in a plane</h2><ol>
-      <p>OP which has---> just above them is said to be the position of vector of P x and y are said to be the X-component and Y-component of OP bar --->
-so position of vector P= (x y)
-</p>
-    <hr>
-  </div>
+    <h2>Position vector of a point in a plane</h2>
+    <p>Two lines XOX' and YOY' perpendicularly intersecting at the point O . XOX' and YOY' are called X axis and Y axis respectively. O be the origin, Let P(x,y) be any point in a plane. O and P are joined. DRAW PM such that PM is perpendicular to OX then OM is equal to x .PM is equal to y. From the figure horizontal displacement OM vector with OM is equal to x and a vertical displacement MP vector with MP is equal to y, collectively gives the displacement OP vector so OP vector is defined by an ordered pair (x,y) so the vector of OP is equal to (x, y) here op vector is said to be the position vector of PX and Y are said to be the X component and Y component of op vecto respectively</p>
+</div>
+
 <div id="vectorrps" class="section">
-    <h2>Representation of vectors in terms of two given co-ordinate</h2><ol>
-      <p>Let P(x1 , y1) and Q(x2,y2) be two points, the position of vectors P and Q are OP bar ---> (x1 y1) and OQ = (x2 y2) respectively and PG bar ---> (x2-x1  y2-y1)
-</p>
-    <hr>
-  </div>
-  <div id="vectormgtd" class="section">
-    <h2>Magnitude of vectors</h2><ol>
-      <p>the magnitude of a vector is its length from origin to the terminal point.</p>
-    <hr>
-  </div>
+    <h2>Representation in terms of coordinates</h2>
+    <p>Let P*X1,Y1) and Q(X2,Y2) be two points on the plane draw PR is perpendicular to OX, QS is perpendicular to OX and PM is perpendicular to QS .PM is equal to RS is equal to OS - OR is equal to X2-X1 is equal to X component MQ is equal to QS-MS is equal to QS pier is equal to Y2 -Y1. The horizontal displacement PM and the vertical displacement MQ collectively gives the displacement PQ therefore PQ vector is equal to (X 2 - X 1, Y 2 - Y 1)</p>
+</div>
+
+<div id="vectormgtd" class="section">
+    <h2>Magnitude of vectors</h2>
+    <p>The magnitude of a vector is its length from origin to terminal point.</p>
+</div>
+
+<div id="confusionSection" class="section">
+    <h2>Confusion Entry</h2>
+    <form id="confusionForm">
+        <input type="text" id="nameInput" placeholder="Your Name" required autocomplete="off"><br>
+        <input type="text" id="topicInput" placeholder="Topic you are confused in" required><br>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
 <!-- MODALS -->
 <div id="overlay"></div>
 
 <div class="modal" id="imageModal">
     <h2>Image Viewer</h2>
-    <img src="bj.png" width="100%">
-    <hr>
-    <img src="bij.png" width="100%">
+    <img src="bj.png" alt="Vector Image 1">
+    <img src="bij.png" alt="Vector Image 2">
     <button onclick="closeModal()">Close</button>
 </div>
-
-<div class="modal" id="chartModal">
-    <h2>Explanation Chart</h2>
-    <ul style="text-align:left;">
-        <li>Vector Quantities</li>
-        <li>Magnitude and Direction</li>
-        <li>Applications in Physics</li>
-    </ul>
-    <button onclick="closeModal()">Close</button>
-</div>
-
-<div class="stars"></div>
 
 <a href="member.html"><button class="show-spacecraft-btn">Back</button></a>
 
 <script>
-function showSection(id) {
+function showSection(id){
     document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
     document.getElementById(id).style.display = 'block';
 }
-
-function showMain() {
-    showSection('mainContent');
+function showMain(){ showSection('mainContent'); }
+function openModal(id){
+    document.getElementById('overlay').style.display='block';
+    document.getElementById(id).style.display='block';
 }
-
-function openModal(id) {
-    document.getElementById('overlay').style.display = 'block';
-    document.getElementById(id).style.display = 'block';
+function closeModal(){
+    document.getElementById('overlay').style.display='none';
+    document.querySelectorAll('.modal').forEach(m => m.style.display='none');
 }
-
-function closeModal() {
-    document.getElementById('overlay').style.display = 'none';
-    document.querySelectorAll('.modal').forEach(m => m.style.display = 'none');
-}
+document.getElementById('confusionForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = document.getElementById('nameInput').value;
+    const topic = document.getElementById('topicInput').value;
+    const saved = JSON.parse(sessionStorage.getItem('confusions')) || [];
+    saved.push({name, topic});
+    sessionStorage.setItem('confusions', JSON.stringify(saved));
+    document.getElementById('confusionForm').reset();
+});
 </script>
 
 </body>
