@@ -8,7 +8,7 @@ body {
     font-family: "Lobster", cursive;
     text-align: center;
     padding: 50px;
-    background: linear-gradient(135deg, #1a2a6c, #4504c8, #0b107c);
+    background: linear-gradient(135deg, #0f0f0f, #3b3a3b, #010102);
     background-size: 400% 400%;
     animation: gradientBG 15s ease infinite;
     color: white;
@@ -146,12 +146,22 @@ function clearConfusions(){
     document.getElementById('quiz').innerHTML = '';
 }
 
-/* 🔥 PREDEFINED QUESTIONS AREA */
 const quizQuestions = [
-    { topic: "Math", question: "What is 5 + 3?", options: { A:"6", B:"7", C:"8", D:"9" }, answer: "C" },
-    { topic: "Science", question: "Which planet is called the Red Planet?", options: { A:"Earth", B:"Mars", C:"Jupiter", D:"Venus" }, answer: "B" },
-    { topic: "English", question: "What is the plural of 'child'?", options: { A:"childs", B:"children", C:"childes", D:"childrens" }, answer: "B" },
+    // ✅ Your original 4 questions
+    { topic: "Vector", question: "What does the parallelogram law of vector addition state?", options: { A:"The sum of two vectors is represented by the diagonal of a parallelogram formed on them.", B:"The sum of two vectors is represented by the area of the parallelogram formed on them.", C:"The sum of two vectors is represented by the difference of their magnitudes.", D:"The sum of two vectors is represented by the triangle formed by them." }, answer: "A" },
+    { topic: "Vector", question: "What does the commutative property of vector addition state?", options: { A:"The sum of vector A and vector B is equal to vector B minus vector A.", B:"The sum of vector A and vector B is equal to the sum of vector B and vector A.", C:"The sum of vector A and vector B is equal to vector A only.", D:"The sum of vector A and vector B is equal to vector B only." }, answer: "B" },
+    { topic: "Vector", question: "What is a zero vector?", options: { A:"A vector with magnitude 1 and direction along an axis", B:"A vector with magnitude 0 and no direction", C:"A vector written in a vertical column", D:"A vector pointing opposite to another vector" }, answer: "B" },
+    { topic: "Vector", question: "What is a negative vector?", options: { A:"A vector with magnitude 0 and no direction", B:"A vector with magnitude 1 and direction along axes", C:"A vector with the same magnitude as another but pointing in the opposite direction", D:"A vector that moves only along the x-axis" }, answer: "C" },
+
+    // ✅ 6 new questions from our discussion
+    { topic: "Equal Vectors", question: "When are two vectors called equal?", options: { A:"Same magnitude and same direction", B:"Same magnitude but different direction", C:"Different magnitude but same direction", D:"Different magnitude and direction" }, answer: "A" },
+    { topic: "Unequal Vectors", question: "Which of these is an unequal vector pair?", options: { A:"Same magnitude and same direction", B:"Same magnitude but different direction", C:"Same direction and same length", D:"Both equal in all aspects" }, answer: "B" },
+    { topic: "Parallel Vectors", question: "If A = k·B and k < 0, what does it mean?", options: { A:"Same direction", B:"Opposite direction", C:"Equal vectors", D:"Zero vector" }, answer: "B" },
+    { topic: "Like Vectors", question: "Like vectors are defined as:", options: { A:"Same direction, any magnitude", B:"Opposite direction, same magnitude", C:"Different directions", D:"Zero magnitude" }, answer: "A" },
+    { topic: "Unlike Vectors", question: "Unlike vectors have:", options: { A:"Same direction", B:"Angle 0° or 180°", C:"Different directions (angle ≠ 0° or 180°)", D:"No direction" }, answer: "C" },
+    { topic: "Coinitial Vectors", question: "Coinitial vectors share:", options: { A:"Same magnitude", B:"Same starting point (tail)", C:"Same direction only", D:"Same endpoint" }, answer: "B" }
 ];
+
 
 /* Display Quiz */
 function showQuiz(){
@@ -179,7 +189,7 @@ function checkAnswer(idx, correct){
     if(selected.value === correct){
         result.textContent="✅ Correct!";
         result.className="correct";
-        launchExternalConfetti(); // 🎊 trigger imported confetti on correct answer
+        launchExternalConfetti();
     } else {
         result.textContent="❌ Wrong. Correct answer is " + correct;
         result.className="wrong";
