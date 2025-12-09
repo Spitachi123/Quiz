@@ -126,6 +126,31 @@ body::before {
     border-radius: 0 0 16px 16px;
     border-top: 2px solid #0099aa;
 }
+
+/* Choice Screen */
+#choiceScreen {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 998;
+    color: cyan;
+    text-align: center;
+}
+#choiceScreen h1 {
+    font-size: 42px;
+    text-shadow: 0 0 18px cyan;
+    margin-bottom: 15px;
+}
+#choiceScreen p {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+/* Game Over Screen */
 #gameOver {
     position: fixed;
     inset: 0;
@@ -201,14 +226,26 @@ body::before {
     </div>
     <div class="footer">Tap a Crewmate to Begin Their Task</div>
 </div>
+
+<!-- Choice Screen -->
+<div id="choiceScreen">
+    <h1>🎯 All Tasks Completed!</h1>
+    <p>Do you want to reveal the Impostor?</p>
+    <div style="margin-top:20px;">
+        <button class="reset-btn" onclick="showImpostor()">Reveal Impostor</button>
+        <button class="reset-btn" onclick="goBack()">Go Back</button>
+    </div>
+</div>
+
+<!-- Game Over Screen -->
 <div id="gameOver">
     <h1>🚨 Impostor Won the Game 🚨</h1>
     <img src="imp.png" alt="Impostor Image">
     <p>Imposter was Rabindra Sir</p>
-    <p>All crewmates were killed by Rabindra Sirs questions</p>
+    <p>All crewmates were killed by Rabindra Sir's questions</p>
     <button class="back-btn" onclick="goBack()">Go Back</button>
 </div>
-</body>
+
 <script>
 if (localStorage.getItem("firstRun") === null) {
     localStorage.setItem("tasksCompleted", 0);
@@ -221,7 +258,7 @@ updateDisplay();
 function updateDisplay() {
     document.getElementById("taskCounter").innerText = `Tasks Completed: ${completed}/5`;
     if (completed >= 5) {
-        document.getElementById("gameOver").style.display = "flex";
+        document.getElementById("choiceScreen").style.display = "flex";
     }
 }
 
@@ -235,13 +272,20 @@ function resetTasks() {
     localStorage.setItem("tasksCompleted", completed);
     updateDisplay();
     document.getElementById("gameOver").style.display = "none";
+    document.getElementById("choiceScreen").style.display = "none";
 }
 
 function goBack() {
     document.getElementById("gameOver").style.display = "none";
+    document.getElementById("choiceScreen").style.display = "none";
     completed = 0;
     localStorage.setItem("tasksCompleted", completed);
     updateDisplay();
+}
+
+function showImpostor() {
+    document.getElementById("choiceScreen").style.display = "none";
+    document.getElementById("gameOver").style.display = "flex";
 }
 
 window.onload = () => {
@@ -256,4 +300,5 @@ window.onload = () => {
     updateDisplay();
 };
 </script>
+</body>
 </html>
